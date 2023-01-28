@@ -1,0 +1,21 @@
+import postcss from 'rollup-plugin-postcss'   
+import typescript from "@rollup/plugin-typescript";
+
+export default {
+  input: "src/index.ts",
+  output: {
+    dir: "output",
+    format: "cjs",
+  },
+  plugins: [
+    typescript({
+      tsconfig: "./tsconfig.json",
+    }),
+    postcss({
+        extract: 'index.css',
+        modules: true,
+        use: ['sass'],
+        minimize: true,
+      })
+  ],
+};
