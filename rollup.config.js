@@ -1,10 +1,12 @@
-import postcss from 'rollup-plugin-postcss'   
-import typescript from "@rollup/plugin-typescript";
+const postcss = require ('rollup-plugin-postcss');   
+const typescript = require ("@rollup/plugin-typescript");
+const url = require ('@rollup/plugin-url');
+const svgr = require ('@svgr/rollup');
 
-export default {
+module.exports = {
   input: "src/index.ts",
   output: {
-    dir: "output",
+    file: 'dist/cjs/index.js',
     format: "cjs",
   },
   plugins: [
@@ -16,6 +18,8 @@ export default {
         modules: true,
         use: ['sass'],
         minimize: true,
-      })
+      }),
+      url(), 
+      svgr({icon : true}),
   ],
 };
